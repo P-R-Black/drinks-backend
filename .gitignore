@@ -1,0 +1,8 @@
+# testing
+.coverage
+
+# production
+
+# misc
+.env
+
