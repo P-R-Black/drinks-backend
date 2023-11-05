@@ -17,7 +17,7 @@ class IngredientName(models.Model):
 
     class Meta:
         unique_together = ['ingredient', 'measurement', 'value']
-        ordering = ['value']
+        ordering = ['ingredient']
 
     def __str__(self):
         return '%s %s %s' % (self.value, self.measurement, self.ingredient)
