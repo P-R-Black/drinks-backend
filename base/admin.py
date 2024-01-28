@@ -16,9 +16,9 @@ class IngredientNameAdmin(admin.ModelAdmin):
 class DrinkRecipeAdmin(admin.ModelAdmin):
     model = DrinkRecipe
 
-    list_display = ('drink', 'mixing_direction') #'flavor_profile', 'base_alcohol', 'ingredient_name', 'garnish'
+    list_display = ('drink', 'mixing_direction',)
     list_filter = ('drink', 'flavor_profile', 'base_alcohol',)
-    search_fields = ('drink', 'base_alcohol')
+    search_fields = ('drink', 'base_alcohol',)
 
 
 @admin.register(AlcoholType)
