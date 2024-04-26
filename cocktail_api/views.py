@@ -1,17 +1,31 @@
+from rest_framework.permissions import (SAFE_METHODS, IsAdminUser,
+                                        BasePermission, DjangoModelPermissionsOrAnonReadOnly)
 from rest_framework.response import Response
-from rest_framework  import generics
+from rest_framework import generics
 from rest_framework.decorators import api_view
 from base.models import Drink, DrinkRecipe
-from .serializers import DrinkSerializer, DrinkRecipeSerializer
+from .serializers import DrinkSerializer, DrinkRecipeSerializer, AlcoholTypeSerializer
 
 
-class DrinkList(generics.ListAPIView):
-    queryset = DrinkRecipe.drinkobjects.all()
+class UserWritePermission(BasePermission):
+    message = "Editing Drink Data is Restriced to Admin Only"
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+
+        return request.user
+
+
+class DrinkDetail(generics.RetrieveUpdateDestroyAPIView, UserWritePermission):
+    # permission_classes = [IsAdminUser]
+    queryset = DrinkRecipe.objects.all()
     serializer_class = DrinkRecipeSerializer
 
 
-class DrinkDetail(generics.RetrieveAPIView):
-    queryset = DrinkRecipe.objects.all()
+class DrinkList(generics.ListAPIView):
+    # permission_classes = [IsAdminUser]
+    queryset = DrinkRecipe.drinkobjects.all()
     serializer_class = DrinkRecipeSerializer
 
 

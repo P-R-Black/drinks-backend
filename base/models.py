@@ -31,7 +31,7 @@ class Garnish(models.Model):
         verbose_name = "Garnish"
         verbose_name_plural = "Garnishes"
         unique_together = ['name', 'value']
-        ordering = ['value']
+        ordering = ['name']
 
     def __str__(self):
         return '%d %s' % (self.value, self.name)
