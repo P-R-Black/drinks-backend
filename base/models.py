@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from decimal import Decimal
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -39,6 +40,11 @@ class Garnish(models.Model):
 
 class AlcoholType(models.Model):
     spirit_type = models.CharField(max_length=250, blank=True, unique=True)
+    slug = models.SlugField(
+        max_length=250,
+        db_index=True,
+        unique=False,
+        blank=True)
 
     def __str__(self):
         return self.spirit_type
@@ -46,6 +52,11 @@ class AlcoholType(models.Model):
 
 class Drink(models.Model):
     drink_name = models.CharField(max_length=250, blank=False, unique=True)
+    slug = models.SlugField(
+        max_length=250,
+        db_index=True,
+        unique=False,
+        blank=True)
 
     def __str__(self):
         return self.drink_name
@@ -75,6 +86,11 @@ class FlavorProfile(models.Model):
 
 class DrinkRecipe(models.Model):
 
+    DRINK_TYPE_CHOICES = (
+        ('cocktail', 'Cocktail'),
+        ('shot', 'Shot'),
+    )
+
     class DrinkRecipeObjects(models.Manager):
         def get_queryset(self):
             return super().get_queryset()
@@ -86,10 +102,12 @@ class DrinkRecipe(models.Model):
                                        null=True,
                                        )
     base_alcohol = models.ManyToManyField(AlcoholType, related_name="base_alcohol")
-    ingredient_name = models.ManyToManyField(IngredientName, blank=True)
+    ingredient_name = models.ManyToManyField(IngredientName, related_name="ingredient_list", blank=True)
     garnish = models.ManyToManyField(Garnish, related_name="garnish")
-    serving_glass = models.ForeignKey(ServingGlass, null=True, related_name="serving_glass", on_delete=models.CASCADE)
+    serving_glass = models.ForeignKey(ServingGlass, null=True, related_name="serving_glass", on_delete=models.PROTECT)
     mixing_direction = models.TextField(max_length=None, null=True)
+    drink_type = models.CharField(max_length=10, choices=DRINK_TYPE_CHOICES, default='cocktail')
+    must_know_drink = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -106,3 +124,4 @@ class DrinkRecipe(models.Model):
         garnish = ''.join(str(g) for g in self.garnish.all())
         return '%s %s %s %s %s' % (self.drink.drink_name, base_alcohol, ingredient_name,
                                    garnish, self.serving_glass)
+

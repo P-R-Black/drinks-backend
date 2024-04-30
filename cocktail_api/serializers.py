@@ -5,40 +5,25 @@ from base.models import Drink, DrinkRecipe, IngredientName, AlcoholType, FlavorP
 class DrinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Drink
-        fields = ['drink_name']
-
-
-class FlavorProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = FlavorProfile
-        fields = ['profile']
-
-
-class AlcoholTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AlcoholType
-        fields = ['spirit_type']
-
-
-class IngredientNameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = IngredientName
-        fields = ['ingredient']
+        fields = ['drink_name', 'slug']
 
 
 class DrinkRecipeSerializer(serializers.ModelSerializer):
-    drink_name = serializers.ReadOnlyField(source='drink.drink_name')
+    drink_name = serializers.StringRelatedField(source='drink.drink_name')
+    slug = serializers.StringRelatedField(source='drink.slug')
     profile = serializers.ReadOnlyField(source='flavor_profile.profile')
     base_alcohol = serializers.StringRelatedField(many=True)
     ingredient_name = serializers.StringRelatedField(many=True)
     garnish = serializers.StringRelatedField(many=True)
     serving_glass = serializers.ReadOnlyField(source='serving_glass.name')
-    mixing_direction = serializers.ReadOnlyField()
+    mixing_direction = serializers.StringRelatedField()
+    drink_type = serializers.StringRelatedField()
+    must_know_drink = serializers.BooleanField()
 
     class Meta:
         model = DrinkRecipe
         fields = [
-            'id', 'drink_name', 'profile', 'base_alcohol', 'ingredient_name', 'garnish', 'serving_glass',
-            'mixing_direction'
+            'id', 'drink_name', 'slug', 'profile', 'base_alcohol', 'ingredient_name',
+            'garnish', 'serving_glass', 'mixing_direction', 'drink_type', 'must_know_drink'
         ]
 

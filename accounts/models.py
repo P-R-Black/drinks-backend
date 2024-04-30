@@ -38,7 +38,7 @@ class CustomAccountManager(BaseUserManager):
 
     def create_user(self, email, user_name, first_name, password, **other_fields):
         if not email:
-            raise ValueError('An email address is required.')
+            raise ValueError(_('An email address is required.'))
 
         email = self.normalize_email(email)
         user = self.model(email=email, user_name=user_name, first_name=first_name, **other_fields)
