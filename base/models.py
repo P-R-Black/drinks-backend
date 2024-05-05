@@ -40,11 +40,7 @@ class Garnish(models.Model):
 
 class AlcoholType(models.Model):
     spirit_type = models.CharField(max_length=250, blank=True, unique=True)
-    slug = models.SlugField(
-        max_length=250,
-        db_index=True,
-        unique=False,
-        blank=True)
+    slug = models.SlugField( max_length=250, db_index=True, unique=True)
 
     def __str__(self):
         return self.spirit_type
@@ -52,11 +48,7 @@ class AlcoholType(models.Model):
 
 class Drink(models.Model):
     drink_name = models.CharField(max_length=250, blank=False, unique=True)
-    slug = models.SlugField(
-        max_length=250,
-        db_index=True,
-        unique=False,
-        blank=True)
+    slug = models.SlugField( max_length=250, db_index=True, unique=True)
 
     def __str__(self):
         return self.drink_name
@@ -108,6 +100,7 @@ class DrinkRecipe(models.Model):
     mixing_direction = models.TextField(max_length=None, null=True)
     drink_type = models.CharField(max_length=10, choices=DRINK_TYPE_CHOICES, default='cocktail')
     must_know_drink = models.BooleanField(default=False)
+    top_hundred_drink = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
