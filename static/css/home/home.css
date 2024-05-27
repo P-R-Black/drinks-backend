@@ -1,0 +1,46 @@
+.hero_section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 50vh;
+    min-width: 100vw;
+    background-color: var(--primary-font-color);
+}
+
+.inner_hero_section{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.inner_hero_section h1{
+    color: var(--primary-background-color);
+    font-size: 5rem;
+
+}
+
+.inner_hero_section h2{
+    color: var(--primary-background-color);
+    font-size: 2.5rem;
+    font-weight: 300;
+
+}
+
+.hero_sub_section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 40vh;
+    min-width: 100vw;
+    background-color: #dadad9;
+}
+
+.inner_hero__sub_section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

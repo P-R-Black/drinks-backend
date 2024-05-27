@@ -104,6 +104,7 @@ class MostPopular(generics.ListCreateAPIView):
 
     def get_queryset(self):
         most_popular = DrinkRecipe.objects.filter(top_hundred_drink=True)
+        print('most_popular_length', len(most_popular))
         return most_popular
 
 

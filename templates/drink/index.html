@@ -1,1 +1,69 @@
-<h1>Home Page</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="Cocktails API">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="https://paulrblack.com/cocktailapi">
+    <meta property="og:description" content="An API With the Names and Recipes for 100 popular cocktails">
+    <meta property="og:local" content="en_US">
+    <meta property="og:site_name" content="CocktailsAPI">
+    <meta name="keywords" content="Cocktails Shots Drinks Alcohol Bar Restaurant">
+    <meta name="author" content="Paul Black">
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about/about.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="inner_nav_container">
+                <div class="navbar_logo_container">
+                    <h2 class="logo" tabindex="-" aria-label="home logo"><a href="/">DrinksAPI</a></h2>
+                </div>
+                <div class="navbar_items">
+                    <ul class="navbar_menu" data-visible="false">
+                        <li class="navbar_item"><a class="navbar_links" href="/">Home</a></li>
+                        <li class="navbar_item"><a class="navbar_links" href="/">About</a></li>
+                    </ul>
+                    <div class="hamburger_menu" id="mobile_menu" aria-controls="navbar_menu" aria-expanded="false">
+                        <span class="bar sr-only"></span>
+                        <span class="bar sr-only"></span>
+                        <span class="bar sr-only"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+{% block main %}
+
+{% endblock %}
+<footer>
+    <div class="container">
+        <div class="footer_container">
+            <div class="navbar_logo">
+                <h2 class="logo" tabindex="0" aria-label="home logo"><a href="/">DrinksAPI</a></h2>
+                <a class="navbar_created" href="https://paulrblack.com">Created By: Paul B</a>
+            </div>
+            <div class="rights_reserved">
+                <p>&copy; DrinksAPI<span class="rights_year"> 2024</span>. All Rights Reserved</p>
+            </div>
+
+            <div class="footer_link_block">
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="{% static 'js/nav.js' %}"></script>
+</html>
