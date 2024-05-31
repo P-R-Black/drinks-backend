@@ -104,7 +104,7 @@ class MostPopular(generics.ListCreateAPIView):
 
     def get_queryset(self):
         most_popular = DrinkRecipe.objects.filter(top_hundred_drink=True)
-        print('most_popular_length', len(most_popular))
+        # print('most_popular_length', len(most_popular))
         return most_popular
 
 
@@ -119,7 +119,6 @@ class ShotByBase(generics.ListCreateAPIView):
             if slugify(item['spirit_type']) == base:
                 item_lookup = item['id']
                 shot_by_base = DrinkRecipe.objects.filter(drink_type='shot', base_alcohol=item_lookup)
-                print('shot_by_base', shot_by_base)
                 return shot_by_base
 
 

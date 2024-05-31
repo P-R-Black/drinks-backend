@@ -11,18 +11,38 @@
         <div class="container">
             <div class="inner_hero_section">
                 <h1>DrinksAPI</h1>
-                <h2>A Restful API for popular cocktails.</h2>
+                <h2>A restful API for popular cocktails</h2>
             </div>
         </div>
     </section>
     <section class="hero_sub_section">
-        <div class="container">
-            <div class="inner_hero__sub_section">
-                <h3>With over 100 cocktails and recipies, the DrinksAPI provides another data set to help
-                    aspiring developers learn to retrieve and manipulate API Data</h3>
+            <div class="inner_hero_sub_section">
+                <h3>With over 100 cocktails and recipies, the DrinksAPI provides a data set to help
+                    aspiring developers gain experience with retrieving and manipulating API Data.
+                </h3>
+                <h3 class="try_it"><a class="try_it_link" href="#demo_section">Try It Out</a></h3>
+            </div>
+    </section>
+    <div class="spacer layer1"></div>
+    <section class="demo_section" id="demo_section">
+        <div class="wave_section_title_container">
+            <h1>Demo API</h1>
+        </div>
+
+        <div class="form_container">
+            <form action="" method="get">
+                {% csrf_token %}
+                <label class="demo_form_input_label" for="url-input">https://127.0.0.1:8000/api/most-popular/</label>
+                <input type="text">
+                <button class="show_api" type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="container displayContainer">
+            <div class="displayArea">
+                <div class="api_result_container">
+                </div>
             </div>
         </div>
     </section>
 </main>
-
 {% endblock %}

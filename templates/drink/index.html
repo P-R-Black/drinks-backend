@@ -15,10 +15,22 @@
     <meta property="og:site_name" content="CocktailsAPI">
     <meta name="keywords" content="Cocktails Shots Drinks Alcohol Bar Restaurant">
     <meta name="author" content="Paul Black">
+    <meta name="twitter:widgets:autoload" content="off">
+
+    <link rel=canonical" href="/">
+    <link rel="me" href="https://twitter.com/TwitterDev">
 
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/home/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/about/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/docs/docs.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -30,7 +42,9 @@
                 <div class="navbar_items">
                     <ul class="navbar_menu" data-visible="false">
                         <li class="navbar_item"><a class="navbar_links" href="/">Home</a></li>
-                        <li class="navbar_item"><a class="navbar_links" href="/">About</a></li>
+                        <li class="navbar_item"><a class="navbar_links" href="{% url 'base:about_page' %}">About</a></li>
+                        <li class="navbar_item"><a class="navbar_links" href="{% url 'base:docs_page' %}">Docs</a></li>
+                        <li class="navbar_item"><a class="navbar_links twitter-follow-button"  rel="me"  href="https://twitter.com/JuanJohn81" data-dnt="true"  target="_blank">Tweet</a></li>
                     </ul>
                     <div class="hamburger_menu" id="mobile_menu" aria-controls="navbar_menu" aria-expanded="false">
                         <span class="bar sr-only"></span>
@@ -41,7 +55,6 @@
             </div>
         </div>
     </nav>
-</body>
 {% block main %}
 
 {% endblock %}
@@ -53,17 +66,30 @@
                 <a class="navbar_created" href="https://paulrblack.com">Created By: Paul B</a>
             </div>
             <div class="rights_reserved">
-                <p>&copy; DrinksAPI<span class="rights_year"> 2024</span>. All Rights Reserved</p>
+                <p>&copy; DrinksAPI<span class="rights_year"> {{ year }}.</span></p>
+                <p>All Rights Reserved</p>
             </div>
 
             <div class="footer_link_block">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
+                <ul class="footer_menu">
+                    <li class="footer_item">
+                        <a class="footer_links" href="/">Home</a>
+                    </li>
+                    <li class="footer_item">
+                        <a class="footer_links" href="{% url 'base:about_page' %}">About</a>
+                    </li>
+                    <li class="footer_item">
+                        <a class="footer_links" href="{% url 'base:docs_page' %}">Docs</a>
+                    </li>
+                    <li class="footer_item">
+                        <a class="footer_links twitter-follow-button"  rel="me"  href="https://twitter.com/JuanJohn81" data-dnt="true" target="_blank">Tweet</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 <script src="{% static 'js/nav.js' %}"></script>
+<script src="{% static 'js/serializedData.js' %}"></script>
+</body>
 </html>

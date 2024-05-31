@@ -1,8 +1,6 @@
 const navBarMenu = document.querySelector('.navbar_menu'); //primaryNav
 const hamburger = document.querySelector('.hamburger_menu'); //NavToggle
 
-const navBarDropdownArrow = document.querySelector('.navbar_link_dropdown');
-const navBarDropdown = document.querySelector('.nav_dropdown');
 
 hamburger.addEventListener('click', () =>{
     const visibility = navBarMenu.getAttribute('data-visible')
@@ -16,11 +14,3 @@ hamburger.addEventListener('click', () =>{
     }
 })
 
-navBarDropdownArrow.addEventListener('click', () => {
-    navBarDropdown.classList.toggle('show')
-})
-
-
-navBarDropdown.addEventListener('click', () => {
-    navBarDropdown.classList.remove('show')
-})

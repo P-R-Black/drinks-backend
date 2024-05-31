@@ -1,0 +1,175 @@
+{% extends 'drink/index.html' %}
+{% load static %}
+
+{% block title %}
+    DrinksAPI
+{% endblock %}
+
+{% block main %}
+    <section class="about_section" id="about_section">
+        <div class="section_title_container">
+            <h1>About DrinksAPI</h1>
+        </div>
+        <div class="about_container">
+            <div class="container">
+                <div class="what_api">
+                    <div class="what_api_title">
+                        <h3>What's an API?</h3>
+                    </div>
+                    <div class="what_api_p">
+                        <p>
+                            <a href="https://en.wikipedia.org/wiki/API">Wikipedia</a> defines an application
+                            programming interface (API) as a way for two or more computer programs or
+                            components to communicate with each other. It is a type of software interface,
+                            offering a service to other pieces of software.[1] A document or standard that
+                            describes how to build or use such a connection or interface is called an API
+                            specification. A computer system that meets this standard is said to implement
+                            or expose an API. The term API may refer either to the specification or to the
+                            implementation. Whereas a system's user interface dictates how its end-users
+                            interact with the system in question, its API dictates how to write code that
+                            takes advantage of that system's capabilities.
+                        </p>
+                    </div>
+                </div>
+                <div class="about_drinks_api_conatiner">
+                    <div class="about_drinks_title">
+                        <h3>What's the DrinksAPI about?</h3>
+                    </div>
+                    <div class="about_drinks_p">
+                        <p>
+                            It's a project that started with a few entries to better understand API
+                            development. Since retreiving and manipulating API data is a large part of
+                            web development, I've made the DrinksAPI available to anyone that want's
+                            another data set to practice on.
+                        </p>
+                        <p>
+                            The "must-know" endpoint for the DrinksAPI returns cocktail recipes that were
+                            deemed very popular among drinkers according to the all knowing internet.
+                        </p>
+                    </div>
+                </div>
+                <div class=api_data_conatiner">
+                    <div class="api_data_title">
+                        <h3>What data is in the API?</h3>
+                    </div>
+                    <ul>
+                        <li>name of cocktail or shot |<span> string</span></li>
+                        <li>slug of cocktail or shot name |<span> string</span></li>
+                        <li>flavor profile of the cocktail |<span> string</span></li>
+                        <li>base alcohol needed for the drink |<span> list</span></li>
+                        <li>ingredient names |<span> list</span></li>
+                        <li>garnish |<span> list</span></li>
+                        <li>serving glass |<span> string</span></li>
+                        <li>mixing directions |<span> string</span></li>
+                        <li>drink type |<span> string</span></li>
+                        <li>must know drink |<span> boolean</span></li>
+                    </ul>
+                    <div class="data_explainer_container">
+                        <div class="data_explainer">
+                            <h3>name of cocktail or shot</h3>
+                            <h4><span>"drink_name": </span>"Tom Collins"</h4>
+                            <p>Provides name of the drink</p>
+
+                            <h3>slug of cocktail or shot name</h3>
+                            <h4><span>"slug": </span>"tom-collins"</h4>
+                            <p>Provides a slug for use in a website url.</p>
+
+                            <h3>flavor profile of the cocktail</h3>
+                            <h4><span>"profile": </span>"Refreshing"</h4>
+                            <p>
+                                Provides a flavor profile for the drink or shot. I've updated the profiles for the drinks
+                                I know. For other's I used the all knowing, always correct, information super highway to
+                                get the flavor profiles. For those drinks that I haven't tried or couldn't find a simple flavor
+                                profile for, I left as "N/A".
+                            </p>
+
+                               <h3>base alcohol needed for the drink</h3>
+                            <h4><span>"base_alcohol": </span>"Gin"</h4>
+                            <p>
+                                Provides the liquor or liqueur that serves as the main ingredient for the cocktail or shot.
+                            </p>
+
+                            <h3>ingredient names</h3>
+                            <h4>
+                                <span>"ingredient_names": </span>["2.00 oz Club Soda", "1.00 oz Lemon Juice",
+                                "2.00 oz London Dry Gin", "0.50 oz Simple Syrup"]
+                            </h4>
+                            <p>
+                                Provides the ingredients needed to make the cocktail or shot. <strong>Warning:</strong>
+                                If you're a cocktail enthusiast, who takes issue with a recipe not being exactly how you know it be,
+                                chill out. These recipes are a guide for creating a decent drink, they are not the
+                                de facto instructions on concocting cocktails. So if you add crispy bacon to
+                                your Bloody Mary or you hold the grenadine on your Tequila Sunrise, great, do you!
+                            </p>
+
+                            <h3>garnish</h3>
+                            <h4><span>"garnish": </span>["Lemon Wheel", "Marachino Cherry"]</h4>
+                            <p>
+                                Provides the recommend garnish for the cocktail or shot. <strong>Warning:</strong> To
+                                the cocktail aficionados, these are only recommondations. If the API says garnish with a lime wedge
+                                and you prefer to do a lemon slice, do you!
+                            </p>
+
+                            <h3>serving glass</h3>
+                            <h4><span>"drink_name": </span>"Collins/Highball"</h4>
+                            <p>
+                                Provides the recommended glass to serve the cocktail in. Martinis shouldn't
+                                be served in old-fashioned glasses and Old Fashions shouldn't be served in
+                                hurricane glasses, but red Solo cups are acceptable for all cocktails and
+                                shots!
+                            </p>
+                            <h3>mixing directions</h3>
+                            <h4><span>"mixing_directions": </span>"1. Add lemon juice, simple syrup, and gin to glass\r\n2.
+                                Add ice to glass.\r\n3. Top off with club soda.\r\n4. Stir drink.\r\n5. Garnish with
+                                lemon wheel and maraschino cherry"</h4>
+                            <p>
+                                Provides instructions on how to build the cocktail or shot.
+                            </p>
+
+                            <h3>drink type</h3>
+                            <h4><span>"drink_type": </span>"cocktail"</h4>
+                            <p>Seperates drinks into two categories, cocktail or shot.</p>
+
+                            <h3>must know drink</h3>
+                            <h4><span>"must_know_drink": </span>"true"</h4>
+                            <p>
+                                Must know drinks are cocktails or shots that I think aspiring bartenders, party hosts
+                                and home mixologists should know. Adding this was inspired by me - the patron - having
+                                to tell a bartender how to make a gin & tonic.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="why_create_api_conatiner">
+                    <div class="why_create_title">
+                        <h3>Why was the DrinksAPI created?</h3>
+                    </div>
+                    <div class="why_create_p">
+                        <p>
+                            Practice! The DrinksAPI was a project started in order to gain experience
+                            working with the <a href="https://www.django-rest-framework.org/">Django Rest
+                            Framework.</a> The project provided the challenge of creating a simple API, which I can use
+                            to practice fetching and displaying API data with frontend frameworks like React.js or
+                            Next.js.
+                        </p>
+                    </div>
+                </div>
+                <div class="tech_stack_conatiner">
+                    <div class="tech_stack_title">
+                        <h3>What's the technology stack?</h3>
+                    </div>
+                    <div class="tech_stack_p">
+                        <ul>
+                            <li>Python</li>
+                            <li>Django</li>
+                            <li>Django Rest Framework</li>
+                            <li>Javascript</li>
+                            <li>Postgres</li>
+                            <li>Digital Ocean</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
