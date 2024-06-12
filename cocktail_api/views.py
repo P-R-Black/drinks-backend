@@ -1,13 +1,12 @@
-from rest_framework.permissions import (SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly,
-                                        BasePermission, IsAdminUser, DjangoModelPermissionsOrAnonReadOnly)
-from rest_framework.response import Response
+from rest_framework.permissions import (
+    SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission,
+    IsAdminUser, DjangoModelPermissionsOrAnonReadOnly)
+from rest_framework_api_key.permissions import HasAPIKey
+from django.core.cache import cache
 from rest_framework import generics
-from rest_framework.decorators import api_view
-from rest_framework import viewsets
-from rest_framework import filters
+
 from base.models import Drink, DrinkRecipe, AlcoholType
-from .serializers import DrinkSerializer, DrinkRecipeSerializer
-from django.shortcuts import get_object_or_404
+from .serializers import  DrinkRecipeSerializer
 from django.utils.text import slugify
 
 
@@ -21,42 +20,22 @@ class UserWritePermission(BasePermission):
         return request.user
 
 
-# class DrinkList(viewsets.ModelViewSet):
-#     permission_classes = [IsAuthenticated]
-#     serializer_class = DrinkRecipeSerializer
-#     queryset = DrinkRecipe.drinkobjects.all()
-
-    # def get_object(self, queryset=None, **kwargs):
-    #     item = self.kwargs.get('pk')
-    #     return get_object_or_404(DrinkRecipe, id=item)
-    #
-    # # Define Custom Queryset
-    # def get_queryset(self):
-    #     return DrinkRecipe.objects.all()
-
-
-# class DrinkList(viewsets.ViewSet):
-#     permission_classes = [IsAuthenticated]
-#     queryset = DrinkRecipe.drinkobjects.all()
-#
-#     def list(self, request):
-#         print('request list', request)
-#         serializer_class = DrinkRecipeSerializer(self.queryset, many=True)
-#         print('serializer_class list', request)
-#         return Response(serializer_class.data)
-#
-#     def retrieve(self, request, pk=None):
-#         print('request retrieve', request)
-#         drink_recipe = get_object_or_404(self.queryset, pk=pk)
-#         print('drink_recipe retrieve', request)
-#         serializer_class = DrinkRecipeSerializer(drink_recipe)
-#         return Response(serializer_class.data)
-
-
 class DrinkList(generics.ListAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [HasAPIKey]
     queryset = DrinkRecipe.drinkobjects.all()
     serializer_class = DrinkRecipeSerializer
+
+    def get_queryset(self):
+        cache_key = 'drink_list'
+        cache_time = 86400
+        queryset = cache.get(cache_key)
+        print('in cache')
+
+        if not queryset:
+            print('not in cache...')
+            queryset = super().get_queryset()
+            cache.set(cache_key, queryset, cache_time)
+        return queryset
 
 
 class DrinkDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -66,7 +45,7 @@ class DrinkDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class AllCocktails(generics.ListCreateAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = DrinkRecipeSerializer
 
     def get_queryset(self):
@@ -104,8 +83,23 @@ class MostPopular(generics.ListCreateAPIView):
 
     def get_queryset(self):
         most_popular = DrinkRecipe.objects.filter(top_hundred_drink=True)
-        # print('most_popular_length', len(most_popular))
         return most_popular
+
+
+class MostPopularByBase(generics.ListCreateAPIView):
+    serializer_class = DrinkRecipeSerializer
+
+    def get_queryset(self, **kwargs):
+        base = slugify(self.kwargs.get('base_alcohol'))
+        base_alcohol = AlcoholType.objects.all()
+
+        for item in base_alcohol.values():
+            if slugify(item['spirit_type']) == base:
+                item_lookup = item['id']
+                most_popular_by_base = DrinkRecipe.objects.filter(
+                    top_hundred_drink=True, base_alcohol=item_lookup
+                )
+                return most_popular_by_base
 
 
 class ShotByBase(generics.ListCreateAPIView):
@@ -193,5 +187,34 @@ View Classes
 9. RetrieveUpdateDestroyAPIView - Used for read-wrte-delete endpoints to represent a single model instance.
 """
 
+# class DrinkList(viewsets.ModelViewSet):
+#     permission_classes = [IsAuthenticated]
+#     serializer_class = DrinkRecipeSerializer
+#     queryset = DrinkRecipe.drinkobjects.all()
 
+    # def get_object(self, queryset=None, **kwargs):
+    #     item = self.kwargs.get('pk')
+    #     return get_object_or_404(DrinkRecipe, id=item)
+    #
+    # # Define Custom Queryset
+    # def get_queryset(self):
+    #     return DrinkRecipe.objects.all()
+
+
+# class DrinkList(viewsets.ViewSet):
+#     permission_classes = [IsAuthenticated]
+#     queryset = DrinkRecipe.drinkobjects.all()
+#
+#     def list(self, request):
+#         print('request list', request)
+#         serializer_class = DrinkRecipeSerializer(self.queryset, many=True)
+#         print('serializer_class list', request)
+#         return Response(serializer_class.data)
+#
+#     def retrieve(self, request, pk=None):
+#         print('request retrieve', request)
+#         drink_recipe = get_object_or_404(self.queryset, pk=pk)
+#         print('drink_recipe retrieve', request)
+#         serializer_class = DrinkRecipeSerializer(drink_recipe)
+#         return Response(serializer_class.data)
 

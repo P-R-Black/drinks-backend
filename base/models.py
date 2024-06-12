@@ -50,6 +50,9 @@ class Drink(models.Model):
     drink_name = models.CharField(max_length=250, blank=False, unique=True)
     slug = models.SlugField( max_length=250, db_index=True, unique=True)
 
+    class Meta:
+        ordering = ['drink_name']
+
     def __str__(self):
         return self.drink_name
 

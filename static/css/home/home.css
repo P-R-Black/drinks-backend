@@ -113,11 +113,27 @@
 }
 
 .form_container{
-    display: flex;
-    height: 20vh;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
     justify-content: center;
 }
+
+.form_container_p {
+    margin-bottom: 1rem;
+}
+
+.form_container p {
+    font-size: clamp(1rem, 1.25rem, 6vw);
+    text-align: center;
+}
+
+.form_container p i {
+    color: var(--api-font-color);
+
+}
+
 
 .form_container form {
     align-items: center;
@@ -126,41 +142,51 @@
     display: flex;
     height: 3rem;
     justify-content: space-between;
-    width: clamp(20rem, 40rem, 90vw);
+    width: clamp(25rem, 55rem, 90vw);
 }
 
 .demo_form_input_label {
     font-size: clamp(.25rem, 1.5rem, 4vw);
     margin-left: 1rem;
+    display: flex;
 }
 
 .form_container form input{
-    width: 0;
+    background: #DFE0E0;
+    border-radius: 5px;
+    font-size: clamp(.25rem, 1.5rem, 4vw);
+    padding-left: .55rem;
+    margin-left: .25rem;
+    width: 11rem;
+}
+
+input:focus{
+    outline: none;
+}
+
+input:active {
+    transform: translateX(2px);
 }
 
 
-
-.form_container form button{
+.form_container form .show_api{
     background: var(--primary-background-color);
-    border-radius: 0rem 1.15rem 1.15rem 0rem;
+    border-radius: 0rem 1.10rem 1.10rem 0rem;
     color: var(--primary-font-color);
     cursor: pointer;
     height: 2.80rem;
     font-size: clamp(.9rem, 1.25rem, 4vw);
-    padding: 0rem 2rem;
+    margin-left: 3rem;
 }
 
-.form_container form button:active {
-    background: #1c2833 ;
-    transform: translateX(2px);
 
-}
 
 .displayContainer{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
+
 }
 
 
@@ -169,15 +195,14 @@
     margin-bottom: 5rem;
     overflow-x: hidden;
     overflow-y: scroll;
-    width: 60%;
+    width: 70%;
     padding: .5rem .75rem;
-
 }
 
-.displayArea.addBackgroundColor {
-    background: var(--fourth-font-color);
-
+.displayArea.addBackgroundColor{
+   background: var(--fourth-font-color);
 }
+
 
 .api_drink_name {
     color:  var(--api-font-color);
@@ -187,7 +212,9 @@
     font-size: clamp(.85rem, 1.10rem, 4vw);
     letter-spacing: .25px;
     min-height: 3.25rem;
+    margin-left: .50rem;
     width: 20rem;
+
 
 
 }
@@ -198,6 +225,7 @@
     font-weight: 600;
     margin-left: 1.5rem;
 
+
 }
 
 .api_mix_name {
@@ -205,7 +233,8 @@
     font-family: "Oswald", sans-serif;
     font-size: clamp(.85rem, 1.10rem, 4vw);
     letter-spacing: .25px;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+
 
 }
 
@@ -218,9 +247,10 @@
 
 .idBox {
     display: flex;
-    margin-bottom: -2rem;
+    margin-bottom: -1.75rem;
     width: 60rem;
 }
+
 
 
 
@@ -250,7 +280,7 @@
         gap: .5rem;
     }
 
-    .form_container form button {
+    .form_container form input {
         border-radius: 1.15rem 1.15rem 1.15rem 1.15rem;
         min-height: 2.50rem;
         width: clamp(15rem, 40rem, 90vw);
@@ -260,6 +290,7 @@
         font-size: clamp(.25rem, 1.5rem, 4vw);
         margin-left: 1rem;
         margin-top: .75rem;
+
     }
 
     .displayContainer{

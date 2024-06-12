@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import (DrinkList, DrinkDetail, BaseDrink, AllCocktails, MustKnows, ShotByBase, AllShots, ShotRecipe,
-                    CreateDrinkRecipe, AdminDrinkDetail, EditDrinkDetail, DeleteDrinkDetail, MostPopular)
+from .views import (DrinkList, DrinkDetail, BaseDrink, AllCocktails, MustKnows, ShotByBase,
+                    AllShots, ShotRecipe, CreateDrinkRecipe, AdminDrinkDetail, EditDrinkDetail,
+                    DeleteDrinkDetail, MostPopular, MostPopularByBase)
 
 # from .views import DrinkList
 # from rest_framework.routers import DefaultRouter
@@ -15,9 +16,10 @@ app_name = 'cocktail_api'
 
 urlpatterns = [
     path('', DrinkList.as_view(), name="listcreate"),
-    path('cocktails/', AllCocktails.as_view(), name='coctails'),
+    path('cocktails/', AllCocktails.as_view(), name='cocktails'),
     path('must-knows/', MustKnows.as_view(), name='mustknows'),
     path('most-popular/', MostPopular.as_view(), name='mostpopular'),
+    path('most-popular/<str:base_alcohol>/', MostPopularByBase.as_view(), name='mostpopularbybase'),
     path('<str:base_alcohol>/shot/<str:shot_name>/', ShotRecipe.as_view(), name='shotrecipe'),
     path('shot/', AllShots.as_view(), name='allshots'),
     path('<str:base_alcohol>/shot/', ShotByBase.as_view(), name='shots'),

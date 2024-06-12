@@ -17,7 +17,7 @@
     </section>
     <section class="hero_sub_section">
             <div class="inner_hero_sub_section">
-                <h3>With over 100 cocktails and recipies, the DrinksAPI provides a data set to help
+                <h3>With {{ api_length }} cocktails and recipies, the DrinksAPI provides a data set to help
                     aspiring developers gain experience with retrieving and manipulating API Data.
                 </h3>
                 <h3 class="try_it"><a class="try_it_link" href="#demo_section">Try It Out</a></h3>
@@ -30,19 +30,29 @@
         </div>
 
         <div class="form_container">
-            <form action="" method="get">
+            <div class="form_container_p">
+                <p>The <i>most-popular</i> endpoint returns the full data set.</p>
+                <p>Also, filter the data set by base alcohol name, <i>i.e. gin</i></p>
+            </div>
+            <form  method="post" action="" id="formSubmit">
                 {% csrf_token %}
-                <label class="demo_form_input_label" for="url-input">https://127.0.0.1:8000/api/most-popular/</label>
-                <input type="text">
-                <button class="show_api" type="submit">Submit</button>
+                <label class="demo_form_input_label">https://127.0.0.1:8000/api/most-popular/
+                    {{ form.as_p }}
+                </label>
+                <input class="show_api" id="show_api" type="submit">
             </form>
         </div>
         <div class="container displayContainer">
-            <div class="displayArea">
+            <div id="displayArea" class="displayArea">
                 <div class="api_result_container">
+                    <div class="openBars"></div>
+                    <div id="results">
+
+                    </div>
+                    <div class="closeBars"></div>
                 </div>
             </div>
         </div>
     </section>
 </main>
-{% endblock %}
+{% endblock %}>

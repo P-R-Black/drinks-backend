@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework_api_key',
     'base',
     'accounts.apps.AccountsConfig',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
+
 
 ]
 
@@ -130,6 +132,22 @@ USE_I18N = True
 USE_TZ = True
 
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # Change the location if your Redis server is running elsewhere
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+        'KEY_PREFIX': 'example'  # Optional, helps to avoid key collisions
+    }
+}
+
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -138,11 +156,14 @@ STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static/'))]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework_api_key.permissions.HasAPIKey',
         'rest_framework.permissions.AllowAny',
+
     ],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # )
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 # REST_FRAMEWORK PERMISSIONS
