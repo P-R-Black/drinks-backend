@@ -174,7 +174,7 @@ input:active {
     border-radius: 0rem 1.10rem 1.10rem 0rem;
     color: var(--primary-font-color);
     cursor: pointer;
-    height: 2.80rem;
+    height: 3rem;
     font-size: clamp(.9rem, 1.25rem, 4vw);
     margin-left: 3rem;
 }

@@ -37,11 +37,11 @@ $(document).ready(function() {
                                 '</pre>' +
                                 '<pre class="idBox">' +
                                 '<code class="apiNameTitle">"base_alcohol": </code>' +
-                                '<code class="api_drink_name">' + '"' + item.base_alcohol + '"' + '</code>' +
+                                '<code class="api_drink_name">' + '[' + '"' + item.base_alcohol + '"' + ']' + '</code>' +
                                 '</pre>' +
                                 '<pre class="idBox">' +
                                 '<code class="apiNameTitle">"ingredient_name": </code>' +
-                                '<code class="api_drink_name">' + '"' + item.ingredient_name + '"' + '</code>' +
+                                '<code class="api_drink_name">' + '[' + '"' + item.ingredient_name + '"' + ']' + '</code>' +
                                 '</pre>' +
                                 '</pre>' +
                                 '<pre class="idBox">' +

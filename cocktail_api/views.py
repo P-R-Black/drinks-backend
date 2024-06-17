@@ -27,7 +27,7 @@ class DrinkList(generics.ListAPIView):
 
     def get_queryset(self):
         cache_key = 'drink_list'
-        cache_time = 86400
+        cache_time = 500 # 86400
         queryset = cache.get(cache_key)
         print('in cache')
 
@@ -78,7 +78,7 @@ class MustKnows(generics.ListCreateAPIView):
 
 
 class MostPopular(generics.ListCreateAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = DrinkRecipeSerializer
 
     def get_queryset(self):
@@ -87,6 +87,7 @@ class MostPopular(generics.ListCreateAPIView):
 
 
 class MostPopularByBase(generics.ListCreateAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = DrinkRecipeSerializer
 
     def get_queryset(self, **kwargs):
