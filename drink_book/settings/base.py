@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import environ
 import os
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$^xe4_g^nj(cy)&%%4ey%-p82h+^kay@ixxm2z@wkay=9--_(n'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = env('DEBUG')
+print('DEBUG Settings', DEBUG)
+
+
 
 
 # Application definition
@@ -82,23 +88,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'drink_book.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'drink',
-        'USER': 'drink',
-        'PASSWORD': 'paulblack123',
-    }
-}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+
+
 
 
 # Password validation

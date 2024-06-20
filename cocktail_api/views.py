@@ -6,7 +6,7 @@ from django.core.cache import cache
 from rest_framework import generics
 
 from base.models import Drink, DrinkRecipe, AlcoholType
-from .serializers import  DrinkRecipeSerializer
+from .serializers import DrinkRecipeSerializer
 from django.utils.text import slugify
 
 
@@ -29,10 +29,8 @@ class DrinkList(generics.ListAPIView):
         cache_key = 'drink_list'
         cache_time = 500 # 86400
         queryset = cache.get(cache_key)
-        print('in cache')
 
         if not queryset:
-            print('not in cache...')
             queryset = super().get_queryset()
             cache.set(cache_key, queryset, cache_time)
         return queryset
