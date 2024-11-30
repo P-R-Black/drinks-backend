@@ -19,6 +19,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.conf import settings
 import environ
 import os
+import debug_toolbar
 
 env = environ.Env()
 environ.Env.read_env()
@@ -27,8 +28,9 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path(env('SECRET_ADMIN_URL') + '/admin/', admin.site.urls),
-    path('', include(('base.urls', 'base'), namespace='base')),
+    path('', include('base.urls', namespace='base')),
     path('api/', include('cocktail_api.urls',  namespace='cocktail_api')),  # 'cocktail_api.urls',
     path('api/user/', include('accounts.urls', namespace='accounts')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('__debug__/', include(debug_toolbar.urls)),
    ]

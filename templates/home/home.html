@@ -9,50 +9,112 @@
 <main>
     <section class="hero_section">
         <div class="container">
-            <div class="inner_hero_section">
-                <h1>DrinksAPI</h1>
-                <h2>A restful API for popular cocktails</h2>
-            </div>
-        </div>
-    </section>
-    <section class="hero_sub_section">
-            <div class="inner_hero_sub_section">
-                <h3>With {{ api_length }} cocktails and recipies, the DrinksAPI provides a data set to help
-                    aspiring developers gain experience with retrieving and manipulating API Data.
-                </h3>
-                <h3 class="try_it"><a class="try_it_link" href="#demo_section">Try It Out</a></h3>
-            </div>
-    </section>
-    <div class="spacer layer1"></div>
-    <section class="demo_section" id="demo_section">
-        <div class="wave_section_title_container">
-            <h1>Demo API</h1>
-        </div>
+            <div class="apiDataContainer">
+                <div class="inner_hero_section">
+                    <form method="post" action="" id="formSubmit">
+                         {% csrf_token %}
+                        <input type="hidden" id="current_drink_id" name="current_drink_id" value="{{ random_drink.id }}">
+                        <Button class="fetchDrinkButton show_api" id="show_api">Get Drink</Button>
+                    </form>
+                    <div id="results" class="postResults">
+                        {% if show_raw_json %}
+                            <div id="json" class="jsonTestSection">
+                                <pre class="jsonPreCode">
+                                {{random_drink}}
+                                </pre>
+                            </div>
 
-        <div class="form_container">
-            <div class="form_container_p">
-                <p>The <i>most-popular</i> endpoint returns the full data set.</p>
-                <p>Also, filter the data set by base alcohol name, <i>i.e. gin</i></p>
-            </div>
-            <form  method="post" action="" id="formSubmit">
-                {% csrf_token %}
-                <label class="demo_form_input_label">https://127.0.0.1:8000/api/most-popular/
-                    {{ form.as_p }}
-                </label>
-                <input class="show_api" id="show_api" type="submit">
-            </form>
-        </div>
-        <div class="container displayContainer">
-            <div id="displayArea" class="displayArea">
-                <div class="api_result_container">
-                    <div class="openBars"></div>
-                    <div id="results">
-
+                         {% elif not show_raw_json %}
+                            <code class="openBrackets">{</code>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"id": </code>
+                                <code class="api_drink_name">{{ random_drink.id }},</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"drink_name": </code>
+                                <code class="api_drink_name">"{{ random_drink.drink_name }}",</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"slug": </code>
+                                <code class="api_drink_name">"{{ random_drink.slug }}",</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"profile": </code>
+                                <code class="api_drink_name">"{{ random_drink.profile }}",</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"base_alcohol": </code>
+                                <code class="api_drink_name">"{{ random_drink.base_alcohol }}",</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"ingredients": </code>
+                                <code class="api_ingredient_list">
+                                    <ul>
+                                        [
+                                    {% for rd in random_drink.ingredient_name %}
+                                        <li>"{{ rd }}",</li>
+                                    {% endfor %}
+                                        ]
+                                    </ul>
+                                </code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"garnish": </code>
+                                <code class="api_drink_name">"{{ random_drink.garnish }}",</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"serving_glass": </code>
+                                <code class="api_drink_name">"{{ random_drink.serving_glass }}",</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"mixing_direction": </code>
+                                <code class="api_drink_name api_mixing_directions">"{{ random_drink.mixing_direction }}",</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"drink_type": </code>
+                                <code class="api_drink_name">"{{ random_drink.drink_type }}",</code>
+                            </pre>
+                            <pre class="idBox">
+                                <code class="apiNameTitle">"must_know_drink": </code>
+                                <code class="api_drink_name">"{{ random_drink.must_know_drink }}",</code>
+                            </pre>
+                            <code class="openBrackets">},</code>
+                        {% else %}
+                            <p class="noDataAvailable">No drink data available.</p>
+                        {% endif %}
                     </div>
-                    <div class="closeBars"></div>
+                    {% comment %}
+                    <a href="?format=json" class="jsonLink" target="_blank">View JSON</a>
+                    {% endcomment %}
+
+                    <form method="get" id="jsonForm">
+                        <div class="radioButtonContainer">
+                            <input
+                                    type="checkbox"
+                                    id="show_raw_json_checkbox"
+                                    name="show_raw_json"
+                                    value="yes"
+                                    {% if show_raw_json %}checked{% endif %}
+                                    onchange="toggleRawJsonView()"
+                            />
+                            <label for="show_raw_json_checkbox">View JSON</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="outer_hero_section">
+                    <div class="api_description_container">
+                        <h2 class="api_description">The DrinksAPI</h2>
+                    </div>
+                    <div class="api_description_p_container">
+                        <p>Randomly returns the name and recipe of a popular cocktail or shot.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+    <script type="text/javascript">
+    const random_drink = JSON.stringify("{{random_drink|safe}}")
+
+    </script>
 {% endblock %}>

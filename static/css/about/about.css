@@ -1,94 +1,69 @@
-.about_section{
-    background: var(--primary-font-color);
+.about_section {
+    background-color: var(--primary-background-color);
+    display: flex;
     min-height: 100vh;
+    justify-content: center;
+
 
 }
 
-.about_container{
+
+.aboutApiDataContainer {
+    min-height: 100vh;
+}
+
+.pageTitleContainer{
     display: flex;
     justify-content: center;
-    margin-top: 5rem;
-    align-items: center;
+    margin-top: 2rem;
 }
 
-.what_api_title, .about_drinks_title, .api_data_title, .why_create_title, .tech_stack_title{
+.pageTitleContainer h2{
+    background: var(--text-bg);
+    background: var(--text-linear-gradient);
+        -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 
-    font-size: clamp(1.5rem, 2rem, 2vw);
+    cursor: pointer;
+    font-size: clamp(1.5rem, 2.25rem, 3.75vw);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.aboutInfoContainer{
+    margin-top: 4rem;
+}
+
+.aboutDataContainer{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.aboutDataTitle{
+    color: #00cc00;
+    font-size: clamp(1.25rem, 2rem, 3.5vw);
+    margin-bottom: .5rem;
+
+}
+
+.aboutDataText a{
+    color: #66b3ff;
+}
+
+.aboutDataText p{
+    color: #ffffff;
+    font-size: clamp(1.1rem, 1.5rem, 1.5vw);
     margin-bottom: 1rem;
 }
 
-.about_drinks_title, .api_data_title, .why_create_title, .tech_stack_title{
-    margin-top: 5rem;
+.aboutDataText ul{
+    padding-left: 1rem;
 }
 
-.what_api_p p, .about_drinks_p p, .api_data_p p, .why_create_p p, .tech_stack_p p{
-    color: var(--darker-primary-font);
+.aboutDataText ul li{
+    color: #ffffff;
     font-size: clamp(1.1rem, 1.5rem, 1.5vw);
-    text-align: justify;
-}
-
-.what_api_p p:nth-child(1), .about_drinks_p p:nth-child(1), .api_data_p p:nth-child(1),
-.why_create_p p:nth-child(1), .tech_stack_p p:nth-child(1){
-    margin-bottom: 2rem;
-}
-
-ul li {
-    color: var(--darker-primary-font);
-    font-size: clamp(1.1rem, 1.5rem, 1.5vw);
-    list-style-type: circle;
-    margin-left: 2rem;
-}
-
-ul li span{
-    font-style: italic;
-}
-
-ul {
-    margin-bottom: 2rem;
-}
-
-.data_explainer_container .data_explainer h3 {
-    font-size: clamp(1.25rem, 1.5rem, 1.5vw);
-    font-weight: bold;
-    margin-bottom: .50rem;
-}
-
-.data_explainer_container .data_explainer h4 {
-    font-family: "Oswald", sans-serif;
-    font-size: clamp(1rem, 1.25rem, 2vw);
-    font-weight: bold;
-    margin-bottom: .50rem;
-}
-
-.data_explainer_container .data_explainer h4 span {
-    font-family: "Oswald", sans-serif;
-    font-size: clamp(1rem, 1.25rem, 2vw);
-    font-weight: bold;
-    margin-bottom: .50rem;
-}
-
-.data_explainer_container .data_explainer p {
-    color: var(--darker-primary-font);
-    font-size: clamp(1.25rem, 1.5rem, 2vw);
-    margin-bottom: 2rem;
+    list-style: circle;
 
 }
-
-/* =============== MEDIA QUERIES (MEDIUM DEVICES) =============== */
-@media screen and (max-width: 1024px) {
-
-
-}
-
-/* =============== MEDIA QUERIES (SMALL DEVICES) =============== */
-@media screen and (max-width: 600px) {
-
-    .what_api_title, .about_drinks_title, .api_data_title, .why_create_title, .tech_stack_title{
-
-        text-align: center;
-
-    }
-}
-
-
-

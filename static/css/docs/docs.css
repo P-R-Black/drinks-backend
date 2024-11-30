@@ -1,63 +1,9 @@
-.docs_section {
-    background: var(--primary-font-color);
-    min-height: 95vh;
-    padding-bottom: 5rem;
+.userEtiquetteContainer{
+    margin-left: 4rem;
+    margin-top: 2rem;
 }
 
-.docs_container{
-    display: flex;
-    justify-content: center;
-    margin-top: 5rem;
-    align-items: center;
-}
-
-.api_info_title, .fair_use_title, .contact_container_title {
-    font-size: clamp(1.5rem, 2rem, 2vw);
-    margin-bottom: 1rem;
-}
-
-.fair_use_request {
-    margin: 1.5rem 0 0 2.5rem;
-}
-
-.fair_use_request_title {
-    font-size: clamp(1rem, 1.5rem, 2vw);
-    margin-bottom: .5rem;
-
-}
-
-.fair_use_title, .contact_container_title{
-    margin-top: 5rem;
-}
-
-.basic_info p, .fair_use p, .contacts p{
-    color: var(--darker-primary-font);
-    font-size: clamp(1.1rem, 1.5rem, 1.5vw);
-    text-align: justify;
-}
-
-.basic_info p:nth-child(1) {
-    margin-bottom: 2rem;
-}
-
-
-
-/* =============== MEDIA QUERIES (MEDIUM DEVICES) =============== */
-@media screen and (max-width: 1024px) {
-
-
-}
-
-/* =============== MEDIA QUERIES (SMALL DEVICES) =============== */
-@media screen and (max-width: 600px) {
-    .api_info_title, .fair_use_title, .contact_container_title {
-        text-align: center;
-    }
-
-    .fair_use_request {
-        margin-left: 1rem;
-    }
-
-
+.etiquetteTitle h3 {
+    color: #00cc00;
 
 }

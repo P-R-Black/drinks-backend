@@ -1,18 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from base.models import (
-    DrinkRecipe, IngredientName, Garnish, AlcoholType,
-    Drink, ServingGlass, FlavorProfile)
-from cocktail_api.serializers import DrinkSerializer, DrinkRecipeSerializer
-from django.http import JsonResponse
+from base.models import (DrinkRecipe, Ingredient, Garnish, AlcoholType, Drink, ServingGlass, FlavorProfile)
+from cocktail_api.serializers import DrinkRecipeSerializerV1
+from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 import json
 from django.core.cache import cache
 from datetime import date
 from rest_framework import generics
-from cocktail_api.views import MostPopular
+from cocktail_api.views import MostPopularV1
 from .forms import APIEndpointForm
-
 import requests
+import logging
+import random
+from rest_framework.response import Response
+from django.core import serializers
+
+
+from rest_framework.permissions import (
+    SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission,
+    IsAdminUser, DjangoModelPermissionsOrAnonReadOnly, AllowAny)
+
+logging.basicConfig(filename='home_page.log', level=logging.DEBUG, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 
 # Create your views here.
@@ -24,26 +32,66 @@ def home_page(request):
     today = date.today()
     year = today.year
 
-    most_popular = DrinkRecipe.objects.filter(top_hundred_drink=True)
-    api_length = len(most_popular)
+    # Check for raw JSON toggle
+    show_raw_json = request.GET.get('show_raw_json', 'no') == 'yes'
+    # Check if data is already in session
+    api_response_data = request.session.get('api_response_data', None)
 
-    form = APIEndpointForm(request.POST or None)
-    if is_ajax(request):
-        if form.is_valid():
-            endpoint_name = form.cleaned_data['endpoint_name']
-            api_response = requests.get(f'http://127.0.0.1:8000/api/most-popular/{endpoint_name}')
-            data = api_response.json()
-            return JsonResponse({'data': data})
-        else:
-            api_response = requests.get('http://127.0.0.1:8000/api/most-popular/')
-            data = api_response.json()
-            return JsonResponse({'data': data})
+    # If not cached, fetch from API
+    if not api_response_data:
+        try:
+            api_response = requests.get('https://www.drinksapi.paulrblack.com/api/v1/most-popular')
+            api_response_data = api_response.json()
+            request.session['api_response_data'] = api_response_data  # Cache data
+        except Exception as e:
+            logging.error(f'Error fetching data: {str(e)}')
+            return render(request, 'home/home.html', {'error_message': f'Error fetching data: {str(e)}'})
 
-    return render(request, 'home/home.html', {'year': year, 'form': form, 'api_length': api_length})
+    #  Process and display data in standard view
+    if len(api_response_data['drinks']) > 0:
+        current_drink_id = request.POST.get('current_drink_id', None)
+        available_drinks = [drink for drink in api_response_data['drinks']['results'] if
+                            drink['id'] != current_drink_id]
+
+        if len(available_drinks) == 0:
+            available_drinks = api_response_data['drinks']['results']
+
+        random_drink = random.choice(available_drinks)
+        data = {
+            "id": random_drink['id'],
+            "drink_name": random_drink['drink_name'],
+            "slug": random_drink['slug'],
+            "profile": random_drink['profile'],
+            "base_alcohol": random_drink['base_alcohol'][0],
+            "ingredient_name": random_drink['ingredients'],
+            "garnish": random_drink['garnish'],
+            "serving_glass": random_drink['serving_glass'],
+            "mixing_direction": random_drink['mixing_direction'],
+            "drink_type": random_drink['drink_type'],
+            "must_know_drink": random_drink['must_know_drink'],
+        }
+
+        # If raw JSON view is requested
+        if show_raw_json:
+            return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json': show_raw_json})
+            # return JsonResponse(data)
+
+        return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json': show_raw_json})
+
+    return render(request, 'home/home.html', {'error_message': 'No popular drinks found'})
 
 
 def about_page(request):
-    return render(request, 'about/about.html')
+    try:
+        api_response = requests.get('https://www.drinksapi.paulrblack.com/api/v1/most-popular')
+        api_response_data = api_response.json()
+        available_drinks = api_response_data
+
+        drinks = DrinkRecipe.objects.all()
+        available_drinks_two = serializers.serialize('json', drinks)
+        return render(request, 'about/about.html')
+    except Exception as e:
+        print(f'Exception: {e}')
 
 
 def docs_page(request):

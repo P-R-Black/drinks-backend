@@ -7,16 +7,13 @@ from drink_book.settings import base
 
 env = environ.Env()
 environ.Env.read_env()
-print('test', base.DEBUG)
 
 
 def main():
     """Run administrative tasks."""
     if base.DEBUG == 'True':
-        print('test after if true', base.DEBUG)
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'drink_book.settings.development')
     else:
-        print('test after if false', base.DEBUG)
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'drink_book.settings.production')
 
     try:
