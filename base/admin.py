@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Drink, IngredientName, DrinkRecipe, AlcoholType, ServingGlass, Garnish, FlavorProfile
+from .models import Drink, Ingredient, DrinkRecipe, AlcoholType, ServingGlass, Garnish, FlavorProfile
 
 
 @admin.register(Drink)
@@ -7,9 +7,9 @@ class DrinkAdmin(admin.ModelAdmin):
     model = Drink
 
 
-@admin.register(IngredientName)
+@admin.register(Ingredient)
 class IngredientNameAdmin(admin.ModelAdmin):
-    model = IngredientName
+    model = Ingredient
 
 
 @admin.register(DrinkRecipe)
@@ -34,6 +34,8 @@ class ServingGlassAdmin(admin.ModelAdmin):
 @admin.register(Garnish)
 class GarnishAdmin(admin.ModelAdmin):
     model = Garnish
+
+    list_display = ('name', 'measurement', 'value',)
 
 
 @admin.register(FlavorProfile)

@@ -1,0 +1,184 @@
+
+
+/* =============== MEDIA QUERIES (EXTRA LARGE DEVICES) =============== */
+@media screen and (max-width: 1350px) {
+
+    .postResults {
+        width: 37rem;
+
+    }
+
+    .outer_hero_section{
+        width: 45vh;
+
+    }
+
+    .fetchDrinkButton{
+        font-size: 1.40rem;
+        border-radius: .5rem;
+        width: clamp(5.25rem, 9.75rem, 15.75vw);
+    }
+
+    .jsonTestSection{
+
+        font-size: .80rem;
+        height: auto;
+        line-height: 17.9167px;
+        margin-left: .85rem;
+        padding: 1rem 1rem;
+        width: 95%;
+    }
+
+}
+
+/* =============== MEDIA QUERIES (LARGE DEVICES) =============== */
+@media screen and (max-width: 1245px){
+
+     .postResults {
+        width: 30rem;
+
+    }
+
+    .outer_hero_section{
+        width: 40vh;
+
+    }
+
+    .fetchDrinkButton{
+        font-size: 1.35rem;
+        width: clamp(5rem, 9.5rem, 15.5vw);
+    }
+
+}
+
+
+/* =============== MEDIA QUERIES (MEDIUM DEVICES) =============== */
+@media screen and (max-width: 1000px){
+
+     .postResults {
+        width: 25rem;
+
+    }
+
+     .outer_hero_section{
+        width: 35vw;
+    }
+
+    .fetchDrinkButton{
+        font-size: 1.25rem;
+        border-radius: .5rem;
+        width: clamp(5rem, 9.5rem, 15.25vw);
+    }
+
+}
+
+
+/* =============== MEDIA QUERIES (SMEDIUM DEVICES) =============== */
+@media screen and (max-width: 800px){
+
+
+    .apiDataContainer{
+        align-items: center;
+        flex-direction: column;
+        height: auto;
+        margin-bottom: 5rem;
+    }
+
+    .fetchDrinkButton{
+        font-size: 1.20rem;
+        width: clamp(5.5rem, 10rem, 16vw);
+    }
+
+    .inner_hero_section{
+        order: 1;
+
+    }
+
+    .outer_hero_section{
+        order: 0;
+        height: 10rem;
+        width: 80%;
+
+    }
+
+    .postResults{
+        height: auto;
+        width: 35rem;
+
+    }
+
+    #formSubmit{
+        margin-top: 2rem;
+
+    }
+
+    .radioButtonContainer{
+        margin: 1rem 0 2rem 0;
+    }
+
+}
+
+
+/* =============== MEDIA QUERIES (SMALL DEVICES) =============== */
+@media screen and (max-width: 640px){
+    .fetchDrinkButton{
+        font-size: .90rem;
+        width: clamp(5.25rem, 9.75rem, 16vw);
+    }
+
+    .postResults{
+        height: auto;
+        width: 25rem;
+    }
+
+     .jsonTestSection{
+        margin-left: .60rem;
+        padding: 1rem 1rem;
+        width: 95%;
+    }
+
+}
+
+
+/* =============== MEDIA QUERIES (EXTRA-SMALL DEVICES) =============== */
+@media screen and (max-width: 450px){
+
+
+    .fetchDrinkButton{
+        font-size: .85rem;
+        width: clamp(5.25rem, 9.75rem, 16vw);
+    }
+
+    .postResults{
+        height: auto;
+        width: 20rem;
+
+    }
+
+    .apiNameTitle{
+        font-size: .70rem;
+        height: 2.5rem;
+    }
+
+    .api_drink_name{
+
+        font-size: .70rem;
+        height: fit-content;
+    }
+
+    .api_mixing_directions{
+        width: 65%;
+    }
+
+    .radioButtonContainer{
+
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    form#jsonForm {
+        margin-bottom: 1rem;
+    }
+}

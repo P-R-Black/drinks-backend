@@ -31,9 +31,6 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = env('DEBUG')
-print('DEBUG Settings', DEBUG)
-
-
 
 
 # Application definition
@@ -48,15 +45,18 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_api_key',
+
     'base',
     'accounts.apps.AccountsConfig',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
+    'debug_toolbar',
 
 
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -72,7 +72,7 @@ ROOT_URLCONF = 'drink_book.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / '../templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,11 +127,11 @@ USE_TZ = True
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',  # Change the location if your Redis server is running elsewhere
+        'LOCATION': 'redis://127.0.0.1:6379/0',  # Change the location if your Redis server is running elsewhere
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
-        'KEY_PREFIX': 'example'  # Optional, helps to avoid key collisions
+        # 'KEY_PREFIX': 'drinks'
     }
 }
 
@@ -144,7 +144,7 @@ REDIS_DB = 0
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static/'))]
+STATICFILES_DIRS = [(os.path.join(BASE_DIR, '../static/'))]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -153,9 +153,10 @@ REST_FRAMEWORK = {
 
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
-
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 100
 }
 
 # REST_FRAMEWORK PERMISSIONS
@@ -219,3 +220,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+INTERNAL_IPS = [
+    '127.0.0.1'
+]
