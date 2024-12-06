@@ -98,30 +98,9 @@ $(document).ready(function(e) {
 
 document.getElementById("json").textContent = JSON.parse(random_drink, undefined, 2);
 
-<<<<<<< HEAD
-function toggleRawJsonViewOnPage() {
-
-
-        const checkbox = document.getElementById('show_raw_json_on_page_checkbox');
-        const showRawJsonOnPage = checkbox.checked ? 'yes' : 'no';
-
-        // Update the URL without refreshing the page
-        const url = new URL(window.location.href);
-        url.searchParams.set('show_raw_json_on_page', showRawJsonOnPage);
-
-        // Redirect to the new URL
-        window.location.href = url.toString();
-
-    }
-
-
-function toggleRawJsonView() {
-
-=======
 function toggleRawJsonView() {
 
 
->>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
         const checkbox = document.getElementById('show_raw_json_checkbox');
         const showRawJson = checkbox.checked ? 'yes' : 'no';
 
@@ -131,10 +110,6 @@ function toggleRawJsonView() {
 
         // Redirect to the new URL
         window.location.href = url.toString();
-<<<<<<< HEAD
-
-=======
->>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
     }
 
 

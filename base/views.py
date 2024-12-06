@@ -33,9 +33,6 @@ def home_page(request):
     year = today.year
 
     # Check for raw JSON toggle
-<<<<<<< HEAD
-    show_raw_json_on_page = request.GET.get('show_raw_json_on_page', 'no') == 'yes'
-
     show_raw_json = request.GET.get('show_raw_json', 'no') == 'yes'
     # Check if data is already in session
     api_response_data = request.session.get('api_response_data', None)
@@ -50,22 +47,6 @@ def home_page(request):
             logging.error(f'Error fetching data: {str(e)}')
             return render(request, 'home/home.html', {'error_message': f'Error fetching data: {str(e)}'})
 
-=======
-    show_raw_json = request.GET.get('show_raw_json', 'no') == 'yes'
-    # Check if data is already in session
-    api_response_data = request.session.get('api_response_data', None)
-
-    # If not cached, fetch from API
-    if not api_response_data:
-        try:
-            api_response = requests.get('https://www.drinksapi.paulrblack.com/api/v1/most-popular')
-            api_response_data = api_response.json()
-            request.session['api_response_data'] = api_response_data  # Cache data
-        except Exception as e:
-            logging.error(f'Error fetching data: {str(e)}')
-            return render(request, 'home/home.html', {'error_message': f'Error fetching data: {str(e)}'})
-
->>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
     #  Process and display data in standard view
     if len(api_response_data['drinks']) > 0:
         current_drink_id = request.POST.get('current_drink_id', None)
@@ -91,34 +72,16 @@ def home_page(request):
         }
 
         # If raw JSON view is requested
-<<<<<<< HEAD
-        if show_raw_json_on_page:
-            print('year: show_raw_json_on_page', year)
-            return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json_on_page': show_raw_json_on_page})
-
-        elif show_raw_json and not show_raw_json_on_page:
-            print('year: show_raw_json', year)
-            return JsonResponse(data)
-
-        print('year:', year)
-        return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json_on_page': show_raw_json_on_page})
-=======
         if show_raw_json:
             return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json': show_raw_json})
             # return JsonResponse(data)
 
         return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json': show_raw_json})
->>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
 
     return render(request, 'home/home.html', {'error_message': 'No popular drinks found'})
 
 
 def about_page(request):
-<<<<<<< HEAD
-    today = date.today()
-    year = today.year
-=======
->>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
     try:
         api_response = requests.get('https://www.drinksapi.paulrblack.com/api/v1/most-popular')
         api_response_data = api_response.json()
@@ -126,20 +89,10 @@ def about_page(request):
 
         drinks = DrinkRecipe.objects.all()
         available_drinks_two = serializers.serialize('json', drinks)
-<<<<<<< HEAD
-        return render(request, 'about/about.html', {'year': year})
-=======
         return render(request, 'about/about.html')
->>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
     except Exception as e:
         print(f'Exception: {e}')
 
 
 def docs_page(request):
-<<<<<<< HEAD
-    today = date.today()
-    year = today.year
-    return render(request, 'docs/docs.html', {'year': year})
-=======
     return render(request, 'docs/docs.html')
->>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
