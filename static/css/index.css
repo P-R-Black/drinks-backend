@@ -46,9 +46,13 @@ hmtl {
 }
 
 .container {
+<<<<<<< HEAD
 
     width: var(--container-width-lg);
     border: 2px solid red;
+=======
+    width: var(--container-width-lg);
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
 }
 
 /* =============== NAVIGATION =============== */
@@ -101,6 +105,7 @@ ul.navbar_menu{
 }
 
 ul.navbar_menu li a {
+<<<<<<< HEAD
     background: var(--text-bg);
     background:  var(--text-linear-gradient);
     -webkit-text-fill-color: transparent;
@@ -109,6 +114,17 @@ ul.navbar_menu li a {
     font-size: clamp(1rem, 1.5rem, 2vw);
     list-style-type: none;
 
+=======
+
+    font-size: 1.5rem;
+    list-style-type: none;
+
+    background: var(--text-bg);
+    background:  var(--text-linear-gradient);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
 }
 
 

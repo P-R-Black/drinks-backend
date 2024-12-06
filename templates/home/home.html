@@ -17,12 +17,14 @@
                         <Button class="fetchDrinkButton show_api" id="show_api">Get Drink</Button>
                     </form>
                     <div id="results" class="postResults">
-                        {% if show_raw_json_on_page %}
+                        {% if show_raw_json %}
                             <div id="json" class="jsonTestSection">
+                                <pre class="jsonPreCode">
                                 {{random_drink}}
+                                </pre>
                             </div>
 
-                         {% elif not show_raw_json_on_page %}
+                         {% elif not show_raw_json %}
                             <code class="openBrackets">{</code>
                             <pre class="idBox">
                                 <code class="apiNameTitle">"id": </code>
@@ -81,32 +83,23 @@
                             <p class="noDataAvailable">No drink data available.</p>
                         {% endif %}
                     </div>
+                    {% comment %}
+                    <a href="?format=json" class="jsonLink" target="_blank">View JSON</a>
+                    {% endcomment %}
 
-                     <div class="radioButtonContainer">
-                            <form method="get" id="jsonForm">
-                                <input
-                                    type="checkbox"
-                                    id="show_raw_json_on_page_checkbox"
-                                    name="show_raw_json_on_page"
-                                    value="yes"
-                                    {% if show_raw_json_on_page %}checked{% endif %}
-                                    onchange="toggleRawJsonViewOnPage()"
-                                />
-                                <label for="show_raw_json_on_page_checkbox">View JSON on Page</label>
-                            </form>
-                            <form method="get" id="jsonForm2">
-                                <input
+                    <form method="get" id="jsonForm">
+                        <div class="radioButtonContainer">
+                            <input
                                     type="checkbox"
                                     id="show_raw_json_checkbox"
                                     name="show_raw_json"
                                     value="yes"
-                                    {% if show_raw_jsone %}checked{% endif %}
+                                    {% if show_raw_json %}checked{% endif %}
                                     onchange="toggleRawJsonView()"
-                                />
-                                <label for="show_raw_json_checkbox">View Raw JSON</label>
-                            </form>
-                         </div>
-
+                            />
+                            <label for="show_raw_json_checkbox">View JSON</label>
+                        </div>
+                    </form>
                 </div>
                 <div class="outer_hero_section">
                     <div class="api_description_container">

@@ -98,6 +98,7 @@ $(document).ready(function(e) {
 
 document.getElementById("json").textContent = JSON.parse(random_drink, undefined, 2);
 
+<<<<<<< HEAD
 function toggleRawJsonViewOnPage() {
 
 
@@ -116,6 +117,11 @@ function toggleRawJsonViewOnPage() {
 
 function toggleRawJsonView() {
 
+=======
+function toggleRawJsonView() {
+
+
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
         const checkbox = document.getElementById('show_raw_json_checkbox');
         const showRawJson = checkbox.checked ? 'yes' : 'no';
 
@@ -125,7 +131,10 @@ function toggleRawJsonView() {
 
         // Redirect to the new URL
         window.location.href = url.toString();
+<<<<<<< HEAD
 
+=======
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
     }
 
 

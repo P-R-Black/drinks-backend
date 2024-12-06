@@ -6,6 +6,15 @@
     justify-content: center;
 }
 
+.apiDataContainer{
+    margin-top: 1rem;
+}
+
+
+.apiDataContainer {
+    display: flex;
+    height: 100vh;
+    justify-content: space-between;
 
 
 .apiDataContainer {
@@ -42,11 +51,14 @@
 
 }
 
+<<<<<<< HEAD
 .fetchDrinkButton:active{
     transform: scale(0.98);
 
 }
 
+=======
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
 .openBrackets{
     color: white;
 }
@@ -81,9 +93,12 @@
     width: 50vh;
 }
 
+<<<<<<< HEAD
 .api_description_p_container p{
     text-align: center;
 }
+=======
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
 
 .idBox{
       width: 95%; /*  You can set a fixed width or max-width if needed */
@@ -147,7 +162,10 @@
 
 .api_mixing_directions{
     height: fit-content;
+<<<<<<< HEAD
     margin-bottom: 1rem;
+=======
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
 }
 
 
@@ -155,12 +173,15 @@ form#jsonForm {
     margin-bottom: 3rem;
 }
 
+<<<<<<< HEAD
 .radioButtonContainer{
     width: 25rem;
     display: flex;
     justify-content: space-between;
 }
 
+=======
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
 .radioButtonContainer label{
     color: #00cc00;
 }
@@ -181,4 +202,65 @@ form#jsonForm {
     margin: 2rem 0 2rem 0;
     padding: 1rem 1rem;
     width: 42rem;
+<<<<<<< HEAD
 }
+=======
+
+
+}
+
+
+/* =============== MEDIA QUERIES (MEDIUM DEVICES) =============== */
+@media screen and (max-width: 1024px) {
+
+    .displayArea {
+        overflow-x: scroll;
+        width: 95%;
+    }
+
+
+}
+
+/* =============== MEDIA QUERIES (SMALL DEVICES) =============== */
+@media screen and (max-width: 600px) {
+
+    .inner_hero_section h2{
+       text-align: center;
+
+    }
+
+    .form_container form{
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .form_container form input {
+        border-radius: 1.15rem 1.15rem 1.15rem 1.15rem;
+        min-height: 2.50rem;
+        width: clamp(15rem, 40rem, 90vw);
+    }
+
+    .demo_form_input_label {
+        font-size: clamp(.25rem, 1.5rem, 4vw);
+        margin-left: 1rem;
+        margin-top: .75rem;
+
+    }
+
+    .displayContainer{
+        margin-top: 3rem;
+    }
+
+    .displayArea {
+        overflow-x: scroll;
+        width: 95%;
+    }
+
+    .apiNameTitle {
+        margin-left: .5rem;
+
+    }
+
+}
+
+>>>>>>> c8d208825f0cfc7c98b00ca54db87b520edc37d5
