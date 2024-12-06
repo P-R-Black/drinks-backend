@@ -148,6 +148,13 @@ form#jsonForm {
     margin-bottom: 3rem;
 }
 
+.radioButtonContainer{
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+
 .radioButtonContainer label{
     color: #00cc00;
 }
@@ -169,60 +176,6 @@ form#jsonForm {
     padding: 1rem 1rem;
     width: 42rem;
 
-
-}
-
-
-/* =============== MEDIA QUERIES (MEDIUM DEVICES) =============== */
-@media screen and (max-width: 1024px) {
-
-    .displayArea {
-        overflow-x: scroll;
-        width: 95%;
-    }
-
-
-}
-
-/* =============== MEDIA QUERIES (SMALL DEVICES) =============== */
-@media screen and (max-width: 600px) {
-
-    .inner_hero_section h2{
-       text-align: center;
-
-    }
-
-    .form_container form{
-        flex-direction: column;
-        gap: .5rem;
-    }
-
-    .form_container form input {
-        border-radius: 1.15rem 1.15rem 1.15rem 1.15rem;
-        min-height: 2.50rem;
-        width: clamp(15rem, 40rem, 90vw);
-    }
-
-    .demo_form_input_label {
-        font-size: clamp(.25rem, 1.5rem, 4vw);
-        margin-left: 1rem;
-        margin-top: .75rem;
-
-    }
-
-    .displayContainer{
-        margin-top: 3rem;
-    }
-
-    .displayArea {
-        overflow-x: scroll;
-        width: 95%;
-    }
-
-    .apiNameTitle {
-        margin-left: .5rem;
-
-    }
 
 }
 

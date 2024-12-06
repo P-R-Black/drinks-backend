@@ -33,6 +33,8 @@ def home_page(request):
     year = today.year
 
     # Check for raw JSON toggle
+    show_raw_json_on_page = request.GET.get('show_raw_json_on_page', 'no') == 'yes'
+
     show_raw_json = request.GET.get('show_raw_json', 'no') == 'yes'
     # Check if data is already in session
     api_response_data = request.session.get('api_response_data', None)
@@ -72,16 +74,23 @@ def home_page(request):
         }
 
         # If raw JSON view is requested
-        if show_raw_json:
-            return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json': show_raw_json})
-            # return JsonResponse(data)
+        if show_raw_json_on_page:
+            print('year: show_raw_json_on_page', year)
+            return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json_on_page': show_raw_json_on_page})
 
-        return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json': show_raw_json})
+        elif show_raw_json and not show_raw_json_on_page:
+            print('year: show_raw_json', year)
+            return JsonResponse(data)
+
+        print('year:', year)
+        return render(request, 'home/home.html', {'random_drink': data, 'year': year, 'show_raw_json_on_page': show_raw_json_on_page})
 
     return render(request, 'home/home.html', {'error_message': 'No popular drinks found'})
 
 
 def about_page(request):
+    today = date.today()
+    year = today.year
     try:
         api_response = requests.get('https://www.drinksapi.paulrblack.com/api/v1/most-popular')
         api_response_data = api_response.json()
@@ -89,10 +98,13 @@ def about_page(request):
 
         drinks = DrinkRecipe.objects.all()
         available_drinks_two = serializers.serialize('json', drinks)
-        return render(request, 'about/about.html')
+        return render(request, 'about/about.html', {'year': year})
     except Exception as e:
         print(f'Exception: {e}')
 
 
 def docs_page(request):
-    return render(request, 'docs/docs.html')
+    today = date.today()
+    year = today.year
+    return render(request, 'docs/docs.html', {'year': year})
+

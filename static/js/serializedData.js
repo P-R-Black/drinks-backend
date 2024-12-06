@@ -98,6 +98,23 @@ $(document).ready(function(e) {
 
 document.getElementById("json").textContent = JSON.parse(random_drink, undefined, 2);
 
+
+
+function toggleRawJsonViewOnPage(){
+
+     const checkbox = document.getElementById('show_raw_json_on_page_checkbox');
+        const showRawJson = checkbox.checked ? 'yes' : 'no';
+
+        // Update the URL without refreshing the page
+        const url = new URL(window.location.href);
+        url.searchParams.set('show_raw_json_on_page', showRawJson);
+
+        // Redirect to the new URL
+        window.location.href = url.toString()
+
+
+}
+
 function toggleRawJsonView() {
 
 

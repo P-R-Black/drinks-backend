@@ -1,3 +1,4 @@
+
 .userEtiquetteContainer{
     margin-left: 4rem;
     margin-top: 2rem;
@@ -7,3 +8,52 @@
     color: #00cc00;
 
 }
+
+
+
+/* =============== MEDIA QUERIES (EXTRA LARGE DEVICES) =============== */
+@media screen and (max-width: 1350px) {
+
+}
+
+/* =============== MEDIA QUERIES (LARGE DEVICES) =============== */
+@media screen and (max-width: 1245px){
+
+
+}
+
+
+/* =============== MEDIA QUERIES (MEDIUM DEVICES) =============== */
+@media screen and (max-width: 1000px){
+
+
+}
+
+
+/* =============== MEDIA QUERIES (SMEDIUM DEVICES) =============== */
+@media screen and (max-width: 800px){
+    .userEtiquetteContainer{
+        margin-left: 2rem;
+    }
+
+}
+
+
+/* =============== MEDIA QUERIES (SMALL DEVICES) =============== */
+@media screen and (max-width: 640px){
+
+}
+
+
+/* =============== MEDIA QUERIES (EXTRA-SMALL DEVICES) =============== */
+@media screen and (max-width: 450px){
+
+     .userEtiquetteContainer{
+        margin-left: 1rem;
+    }
+
+
+}
+
+
+
