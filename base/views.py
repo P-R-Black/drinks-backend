@@ -91,16 +91,8 @@ def home_page(request):
 def about_page(request):
     today = date.today()
     year = today.year
-    try:
-        api_response = requests.get('https://www.drinksapi.paulrblack.com/api/v1/most-popular')
-        api_response_data = api_response.json()
-        available_drinks = api_response_data
+    return render(request, 'about/about.html', {'year': year})
 
-        drinks = DrinkRecipe.objects.all()
-        available_drinks_two = serializers.serialize('json', drinks)
-        return render(request, 'about/about.html', {'year': year})
-    except Exception as e:
-        print(f'Exception: {e}')
 
 
 def docs_page(request):

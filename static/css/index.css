@@ -49,7 +49,6 @@ hmtl {
 .container {
 
     width: var(--container-width-lg);
-    border: 2px solid red;
 }
 
 /* =============== NAVIGATION =============== */
